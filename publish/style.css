@@ -1,0 +1,10 @@
+*{
+    list-style: none;
+}
+ul li{
+    line-height: 50px;
+}
+ul li span{
+    float: left;
+    width: 100px;
+}

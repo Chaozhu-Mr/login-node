@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="use" name="user"><br>
+    <input type="password" id="psw" name="password"><br>
+    <button id="btn">login</button>
+
+    <script src="jquery.js"></script>
+
+    <script>
+
+        $('#btn').on('click', function () {
+            if ($('#use').val() !== '' && $('#psw').val() !== '') {
+                $.ajax({
+                    url: '/logined',
+                    type: 'post',
+                    data: {'user': $('#use').val(), 'password': $('#psw').val()},
+                    success: function (data) {
+                        if (data.code === 1) {
+                            alert(data.msg);
+                        } else if (data.code === 2) {
+                            alert(data.msg);
+                        } else if (data.code === 0) {
+                            alert(data.msg);
+                            location.href = '/allName';
+                        }
+                    }
+                })
+            } else {
+                alert('请先输入!');
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>

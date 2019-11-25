@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <ul>
+        <% data.forEach(function (lis) { %>
+            <li><span>姓名: <%= lis.user %></span><span>密码: <%= lis.password %></span><button class="updata" data-id=<%= lis.id %> data-user=<%= lis.user %> data-password=<%= lis.password %>>修改</button><button class="del" data-id=<%= lis.id %>>删除</button></li>
+        <% }) %>
+    </ul>
+    <input type="text" id="user">
+    <input type="text" id="psw">
+    <button id="btn">确认</button>
+
+    <script src="jquery.js"></script>
+
+    <script>
+        var id = 0;
+        $('.updata').on('click', function () {
+            $('#user').val($(this).data('user'));
+            $('#psw').val($(this).data('password'));
+            id = $(this).data('id');
+        })
+        $('#btn').click(function () {
+            $.ajax({
+                url: '/updata',
+                type: 'post',
+                data: {id: id, user: $('#user').val(), psw: $('#psw').val()},
+                success: function (data) {
+                    location.reload();
+                }
+            })
+        })
+        $('.del').click(function () {
+            $.ajax({
+                url: '/delet',
+                type: 'post',
+                data: {id: $(this).data('id')},
+                success: function (data) {
+                    location.reload();
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>
